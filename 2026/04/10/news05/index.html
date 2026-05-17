@@ -96,6 +96,10 @@
 
   <!-- 额外的追加注入项 -->
   
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/comments/waline.css" />
+
+  
 <meta name="generator" content="Hexo 8.1.1"></head>
 
     <body class="custom-background">
@@ -232,11 +236,14 @@
                 
                     <li>
                         <i class="fa fa-eye"></i>
-                        <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
-<span id="busuanzi_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 
- 次阅读
+                        <span data-path="/2026/04/10/news05/" class="waline-pageview-count"> </span> 次阅读
                     </li>
                 
+                
+                    <li>
+                        <i class="fa fa-commenting-o"></i>
+                        <span data-path="/2026/04/10/news05/" class="waline-comment-count"> </span> 条评论
+                    </li>
                 
             </ul>
         </header>
@@ -287,7 +294,7 @@
     
     
         <div class="comment-post">
-            <div class="kr-comments lazy-load"><div id="tcomment"></div></div>
+            <div id="w-comments" class="kr-comments" data-path="/2026/04/10/news05/"></div>
         </div>
     
 </article>
@@ -522,6 +529,8 @@
 
 <!-- 额外的追加注入项 -->
 
+    [object Object]
+
 
         <script>
     if (!window.kr) {
@@ -547,8 +556,7 @@
 
 <!-- 额外的追加注入项 -->
 
-  <script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
-<script src="/comments/twikoo.js"></script>
+  <script defer type="module" src="/comments/waline.js"></script>
 
 
 
