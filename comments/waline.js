@@ -2,7 +2,7 @@ import { init, commentCount  } from 'https://unpkg.com/@waline/client@v3/dist/wa
 import { pageviewCount } from 'https://unpkg.com/@waline/client@v3/dist/pageview.js';
 
 (() => {
-  const serverURL = 'waline.1024568.xyz';
+  const serverURL = 'https://waline.1024568.xyz';
   let firstVisit = true;
 
   const loadComments = async () => {
