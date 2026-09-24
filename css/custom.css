@@ -1,0 +1,149 @@
+/* ==========================================================================
+   85班周报 · 站点级自定义样式
+   加载顺序在主题的 generated.css 之后，且不带 @layer，
+   因此这里的规则一定覆盖主题默认值（CSS 级联层：无层 > 分层）。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 中文排版字体栈
+   主题默认 --font-sans 是 Franklin Gothic、--font-serif 是 Georgia，
+   两者都没有中文字形，中文会掉到浏览器的宋体默认值上，忽大忽小。
+   这里换成中文字体优先、拉丁字体兜底的组合。
+   报纸味儿的关键在标题用「宋体系」，正文用黑体系。
+   -------------------------------------------------------------------------- */
+:root {
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+               "Noto Sans SC", "Source Han Sans SC", "WenQuanYi Micro Hei",
+               system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong",
+                "SimSun", "AR PL UMing CN", Georgia, "Times New Roman", serif;
+}
+
+/* 报头：4 个汉字的刊名，要压得住整页 */
+.masthead-font {
+  font-family: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC",
+               "SimSun", Georgia, serif;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+/* 正文中文可读性：中文字面比拉丁方，行高要更松 */
+.article-body p,
+.article-body li {
+  line-height: 1.95;
+  word-break: break-word;
+}
+
+.article-body h2,
+.article-body h3 {
+  font-family: "Songti SC", "STSong", "Noto Serif SC", "SimSun", serif;
+  letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   2. 老站的「点按揭示」彩蛋（<span class="blur">）
+   老站靠 Kratos 的 JS 实现，这里用纯 CSS 模糊 + 一小段 JS 切换 .is-revealed。
+   -------------------------------------------------------------------------- */
+.article-body .blur {
+  filter: blur(5px);
+  cursor: pointer;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.055);
+  text-decoration: underline dotted rgba(0, 0, 0, 0.45);
+  text-underline-offset: 3px;
+  transition: filter 0.18s ease, background-color 0.18s ease;
+}
+
+.article-body .blur:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.article-body .blur.is-revealed,
+.article-body .blur:focus {
+  filter: none;
+  background: transparent;
+  text-decoration: none;
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. 从老站迁过来的三类特殊块
+   信息框 / 警告框 / 表格，都是当年 Kratos 里 Bootstrap 风格的组件。
+   -------------------------------------------------------------------------- */
+.article-body .post-panel {
+  border: 1px solid #000;
+  border-left: 6px solid #000;
+  background: rgba(0, 0, 0, 0.035);
+  padding: 1.15rem 1.35rem;
+  margin: 2rem 0;
+  break-inside: avoid;
+}
+
+.article-body .post-panel-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  padding-bottom: 0.55rem;
+  margin: 0 0 0.9rem;
+}
+
+.article-body .post-panel-body > *:first-child { margin-top: 0; }
+.article-body .post-panel-body > *:last-child { margin-bottom: 0; }
+.article-body .post-panel-body ul,
+.article-body .post-panel-body ol { padding-left: 1.15rem; }
+
+/* 警告框：反白，和报纸的黑白底色撞在一起最扎眼 */
+.article-body .post-alert {
+  border: 2px solid #000;
+  background: #000;
+  color: #f5f5f4;
+  padding: 1rem 1.25rem;
+  margin: 2rem 0;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  break-inside: avoid;
+}
+
+.article-body .post-alert p { margin: 0; line-height: 1.8; }
+.article-body .post-alert a { color: #f5f5f4; }
+
+/* 考试安排表之类的表格 */
+.article-body .story-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  break-inside: avoid;
+}
+
+.article-body .story-table th,
+.article-body .story-table td {
+  border: 1px solid #000;
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+}
+
+.article-body .story-table thead th {
+  background: #000;
+  color: #f5f5f4;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.article-body .story-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.045);
+}
+
+/* --------------------------------------------------------------------------
+   4. 长文（pattern: article）是双栏排版，块级元素不要被栏切开
+   -------------------------------------------------------------------------- */
+.article-body.article-columns .post-panel,
+.article-body.article-columns .post-alert,
+.article-body.article-columns .story-table,
+.article-body.article-columns blockquote,
+.article-body.article-columns figure {
+  break-inside: avoid;
+}
